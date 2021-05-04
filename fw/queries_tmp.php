@@ -5,6 +5,7 @@ const OP_JOIN='joinQuery';
 const OP_UPDATE='updateQuery';
 const OP_LIKE='updateQuery';
 const OP_COUNT='updateQuery';
+
 const OPS=[OP_SELECT_PK,OP_SELECT_NO_PK,OP_JOIN,OP_UPDATE,OP_LIKE,OP_COUNT];
 
 function connect($dsn,$user,$password){

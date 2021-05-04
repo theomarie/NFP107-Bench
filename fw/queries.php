@@ -5,7 +5,13 @@ const OP_JOIN='joinQuery';
 const OP_UPDATE='updateQuery';
 const OP_LIKE='updateQuery';
 const OP_COUNT='updateQuery';
-const OPS=[OP_SELECT_PK,OP_SELECT_NO_PK,OP_JOIN,OP_UPDATE,OP_LIKE,OP_COUNT];
+
+// AVEC LES INDEX
+const OP_LIKEAXEL='likeAxel';
+const OP_CREATEINDEX='createIndex';
+const OP_LIKEAXELWITHINDEX='likeAxelWithIndex';
+
+const OPS=[OP_SELECT_PK,OP_SELECT_NO_PK,OP_JOIN,OP_UPDATE,OP_LIKE,OP_COUNT,OP_LIKEAXEL,OP_CREATEINDEX,OP_LIKEAXELWITHINDEX];
 
 function connect($user,$password){
 	try {
@@ -71,5 +77,18 @@ function likeQuery(\PDO $db){
 function countQuery(\PDO $db){
 	$st=prepare($db,'select count(*) from user_');
 	$st->execute();
+	return $st->fetchAll();
+}
+
+//INDEX
+function likeAxel(\PDO $db){
+	$st=prepare($db, 'select firstname,lastname from user_ where firstname = ?');
+	$st->execute(['axel']);
+	return $st->fetchAll();
+}
+
+function likeAxelWithIndex(\PDO $db){
+	$st=prepare($db,'select firstname,lastname from user_ where firstname = ?');
+	$st->execute(['axel']);
 	return $st->fetchAll();
 }
